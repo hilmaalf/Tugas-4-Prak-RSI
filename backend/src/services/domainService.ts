@@ -1,5 +1,4 @@
-import { randomBytes, scrypt as scryptCallback } from 'node:crypto';
-import { promisify } from 'node:util';
+import bcrypt from 'bcryptjs';
 import {
     DomainRepository,
     type NewAuditLog,
@@ -9,7 +8,6 @@ import {
     type NewUser,
 } from '../repositories/domainRepository.ts';
 
-const scrypt = promisify(scryptCallback);
 type UserRole = NewUser['role'];
 
 function invalidInput(): never {
@@ -34,9 +32,7 @@ function positiveInteger(value: unknown): number {
 }
 
 async function hashPassword(password: string): Promise<string> {
-    const salt = randomBytes(16);
-    const hash = (await scrypt(password, salt, 64)) as Buffer;
-    return `scrypt$${salt.toString('hex')}$${hash.toString('hex')}`;
+    return bcrypt.hash(password, Number(process.env.BCRYPT_SALT_ROUNDS ?? 10));
 }
 
 export class DomainService {

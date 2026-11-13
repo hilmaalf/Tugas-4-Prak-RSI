@@ -25,7 +25,7 @@ export default function ProfilePage() {
   return (
     <div className="container page narrow">
       <div className="card">
-        <h1>Profil saya</h1>
+        <h1>👤 Profil saya</h1>
         <dl className="kv">
           <dt>ID</dt><dd>{me.id}</dd>
           <dt>Nama</dt><dd>{me.name}</dd>

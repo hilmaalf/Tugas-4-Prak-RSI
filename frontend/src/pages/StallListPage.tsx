@@ -70,7 +70,7 @@ export default function StallListPage() {
     <div className="container page">
       <div className="page-head">
         <div>
-          <h1>Daftar Warung</h1>
+          <h1>🍜 Daftar Warung</h1>
           <p className="muted">Temukan warung favorit di kantin kampus.</p>
         </div>
         {canCreateStall(user) && <Link to="/stalls/new" className="btn btn-primary">+ Tambah warung</Link>}

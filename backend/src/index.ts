@@ -28,8 +28,14 @@ app.use((req: Request, res: Response, next) => {
 
 app.use(express.json());
 
+app.get('/', (req: Request, res: Response) => {
+    res.status(200).json({ status: 'success', message: 'API berjalan' });
+});
+
 // Dokumentasi API (Swagger UI) dari spec hasil generate swagger-autogen.
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: { persistAuthorization: true },
+}));
 
 app.get('/health', async (req: Request, res: Response) => {
     try {

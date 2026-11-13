@@ -24,6 +24,16 @@
     }
   },
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "description": "",
@@ -261,7 +271,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -279,7 +294,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/menu-items": {
@@ -289,7 +309,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -307,7 +332,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/menu-items/{id}": {
@@ -325,7 +355,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "put": {
         "description": "",
@@ -349,7 +384,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "delete": {
         "description": "",
@@ -365,7 +405,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/reviews": {
@@ -375,7 +420,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -393,7 +443,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/reviews/{id}": {
@@ -411,7 +466,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "delete": {
         "description": "",
@@ -427,7 +487,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/likes": {
@@ -447,7 +512,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/likes/{id}": {
@@ -465,7 +535,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/flags": {
@@ -475,7 +550,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/flags/{id}": {
@@ -501,7 +581,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/audit": {
@@ -511,7 +596,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "description": "",
@@ -529,7 +619,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     }
   },

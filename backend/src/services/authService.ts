@@ -1,3 +1,5 @@
+import { scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
+import { promisify } from 'node:util';
 import bcrypt from 'bcryptjs';
 import { AppError } from '../errors/AppError.ts';
 import { UnauthorizedError } from '../errors/UnauthorizedError.ts';
@@ -7,6 +9,18 @@ import type { AuthUserDto, LoginResponseDto } from '../dtos/authDto.ts';
 import { signToken, type AuthUser } from './tokenService.ts';
 
 type UserRow = NonNullable<Awaited<ReturnType<UserRepository['findByEmail']>>>;
+const scrypt = promisify(scryptCallback);
+
+async function verifyPassword(password: string, passwordHash: string): Promise<boolean> {
+    if (!passwordHash.startsWith('scrypt$')) return bcrypt.compare(password, passwordHash);
+
+    const [, saltHex, expectedHex] = passwordHash.split('$');
+    if (!/^[\da-f]{32}$/i.test(saltHex ?? '') || !/^[\da-f]{128}$/i.test(expectedHex ?? '')) return false;
+
+    const actualHash = (await scrypt(password, Buffer.from(saltHex, 'hex'), 64)) as Buffer;
+    const expectedHash = Buffer.from(expectedHex, 'hex');
+    return timingSafeEqual(actualHash, expectedHash);
+}
 
 export class AuthService {
     constructor(private readonly userRepository: UserRepository = new UserRepository()) {}
@@ -32,7 +46,7 @@ export class AuthService {
 
     async login(input: LoginInput): Promise<LoginResponseDto> {
         const row = await this.userRepository.findByEmail(input.email);
-        if (!row || !(await bcrypt.compare(input.password, row.passwordHash))) {
+        if (!row || !(await verifyPassword(input.password, row.passwordHash))) {
             throw new UnauthorizedError('Email atau password salah');
         }
 
